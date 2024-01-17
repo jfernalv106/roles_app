@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:roles/model/roles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:roles/bloc/rol_local/rol_local_bloc.dart';
+import 'package:roles/local_model/role_local.dart';
 
-class RolList extends StatelessWidget {
-  const RolList({super.key, required this.roles});
-  final List<Rol> roles;
-
+class RolLocalList extends StatelessWidget {
+  const RolLocalList({super.key, required this.roles});
+  final List<RolLocal> roles;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 600,
+      height: 250,
       child: ListView.builder(
         itemCount: roles.length,
         itemBuilder: (context, index) {
@@ -20,7 +21,8 @@ class RolList extends StatelessWidget {
     );
   }
 
-  Widget _card(BuildContext context, Rol rol) {
+  Widget _card(BuildContext context, RolLocal rol) {
+    final rolBloc = BlocProvider.of<RolLocalBloc>(context, listen: false);
     return Center(
       child: Card(
         margin: const EdgeInsets.all(4.0),
@@ -32,6 +34,9 @@ class RolList extends StatelessWidget {
             ListTile(
                 leading: const Icon(Icons.add_box_outlined),
                 title: Text('Rol: ${rol.rol}'),
+                onLongPress: () {
+                  rolBloc.add(RemoveRolLocal(rol));
+                },
                 subtitle: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
