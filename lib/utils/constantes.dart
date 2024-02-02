@@ -19,4 +19,5 @@ class Medidas {
   }
 }
 
-const URL = 'http://192.168.100.6';
+const URL = 'https://maderera-roles-production.up.railway.app';
+// const URL = 'http://192.168.100.6';

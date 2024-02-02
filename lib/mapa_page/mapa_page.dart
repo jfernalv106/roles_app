@@ -99,7 +99,8 @@ class _MapaPageState extends State<MapaPage> {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30.0, vertical: 10.0),
-                                child: const Text('Calcular'),
+                                child: Text(
+                                    'Calcular  (${state.locacion.lastKnownLocation!.latitude} ${state.locacion.lastKnownLocation!.longitude})'),
                               ));
                         },
                       ),

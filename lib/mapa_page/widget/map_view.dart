@@ -19,13 +19,17 @@ class MapView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SizedBox(
       width: size.width,
-      height: size.height * 0.62,
+      height: size.height * 0.672,
       child: GoogleMap(
         initialCameraPosition: initialCameraPosition,
-        compassEnabled: false,
+        compassEnabled: true,
         myLocationEnabled: true,
         zoomControlsEnabled: true,
         myLocationButtonEnabled: true,
+        buildingsEnabled: true,
+        indoorViewEnabled: true,
+        mapToolbarEnabled: true,
+        mapType: MapType.satellite,
 
         onMapCreated: (controller) =>
             mapBloc.add(OnMapInitialzedEvent(controller)),

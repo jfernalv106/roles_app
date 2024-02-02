@@ -8,10 +8,12 @@ import 'package:roles/local_model/role_local.dart';
 class RolLocalList extends StatelessWidget {
   const RolLocalList({super.key, required this.roles});
   final List<RolLocal> roles;
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 250,
+      height: size.height * 0.21,
       child: ListView.builder(
         itemCount: roles.length,
         itemBuilder: (context, index) {
@@ -23,28 +25,40 @@ class RolLocalList extends StatelessWidget {
 
   Widget _card(BuildContext context, RolLocal rol) {
     final rolBloc = BlocProvider.of<RolLocalBloc>(context, listen: false);
-    return Center(
-      child: Card(
-        margin: const EdgeInsets.all(4.0),
+    return Card(
+      margin: const EdgeInsets.all(4.0),
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            ListTile(
-                leading: const Icon(Icons.add_box_outlined),
-                title: Text('Rol: ${rol.rol}'),
-                onLongPress: () {
-                  rolBloc.add(RemoveRolLocal(rol));
-                },
-                subtitle: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('${rol.propietario}'),
-                    Text('Predio: ${rol.nombrePredio}  '),
-                  ],
-                )),
+            Row(
+              children: [
+                Expanded(
+                  child: ListTile(
+                      leading: const Icon(Icons.map_outlined),
+                      title: Text('Rol: ${rol.rol}'),
+                      subtitle: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${rol.propietario}'),
+                          Text('Predio: ${rol.nombrePredio}  '),
+                        ],
+                      )),
+                ),
+                IconButton(
+                    onPressed: () {
+                      rolBloc.add(RemoveRolLocal(rol));
+                      Navigator.pushNamed(context, 'mapa');
+                    },
+                    icon: const Icon(
+                      Icons.cancel_outlined,
+                      color: Colors.red,
+                    ))
+              ],
+            ),
           ],
         ),
       ),

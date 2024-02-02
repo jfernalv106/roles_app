@@ -19,7 +19,7 @@ class Calculos {
       RolLocal rol, PerimetroLocal ubicacion) {
     for (PerimetroLocal punto in rol.perimetros) {
       final distancia = distanciaEntrePuntos(punto, ubicacion);
-      if (distancia < 10) {
+      if (distancia < 20) {
         return rol;
       }
     }

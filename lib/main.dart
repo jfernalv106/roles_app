@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roles/app_router.dart';
 import 'package:roles/bloc/locacion/locacion_bloc.dart';
 import 'package:roles/bloc/mapa/mapa_bloc.dart';
+import 'package:roles/bloc/menu/menu_bloc.dart';
 
 import 'bloc/rol/rol_bloc.dart';
 import 'bloc/rol_local/rol_local_bloc.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LocacionBloc(),
+        ),
+        BlocProvider(
+          create: (context) => MenuBloc(),
         )
       ],
       child: MaterialApp(
