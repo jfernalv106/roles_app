@@ -27,6 +27,7 @@ class MapaPage extends StatefulWidget {
 class _MapaPageState extends State<MapaPage> {
   late LocacionBloc locationBloc;
   Set<Polygon> polygons = HashSet<Polygon>();
+  Set<Marker> markers = <Marker>{};
   final rolServiceLocal = RolServiceLocal();
 
   @override

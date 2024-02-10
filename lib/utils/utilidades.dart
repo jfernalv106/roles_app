@@ -24,4 +24,16 @@ class Utilidades {
       },
     );
   }
+
+  static void showToast(BuildContext context, String titulo, String mensaje) {
+    final scaffold = ScaffoldMessenger.of(context);
+
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(titulo),
+        action: SnackBarAction(
+            label: mensaje, onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
 }

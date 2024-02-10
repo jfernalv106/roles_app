@@ -32,14 +32,14 @@ class CustonNavigator extends StatelessWidget {
                 label: 'Mapa',
                 activeIcon: Icon(Icons.map_outlined)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search_outlined, color: Colors.white),
-                label: 'Buscar',
-                activeIcon: Icon(Icons.search_outlined)),
-            BottomNavigationBarItem(
                 icon:
                     Icon(Icons.edit_location_alt_outlined, color: Colors.white),
                 label: 'Mis Puntos',
                 activeIcon: Icon(Icons.edit_location_alt_outlined)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.search_outlined, color: Colors.white),
+                label: 'Buscar',
+                activeIcon: Icon(Icons.search_outlined)),
           ],
           iconSize: 24,
           type: BottomNavigationBarType.fixed,

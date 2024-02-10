@@ -4,10 +4,12 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roles/mapa_page/mapa_page.dart';
 import 'package:roles/menu/widget/button_navigator.dart';
+import 'package:roles/mis_puntos/puntos_page.dart';
 import 'package:roles/role_local_page.dart/rol_local_page.dart';
 import 'package:roles/roles_page/roles_page.dart';
 
 import '../bloc/menu/menu_bloc.dart';
+import '../mapa_busqueda/mapa_busqueda.dart';
 
 class CustomNavegacionBar extends StatelessWidget {
   const CustomNavegacionBar({super.key});
@@ -25,10 +27,10 @@ class CustomNavegacionBar extends StatelessWidget {
                   return const MapaPage();
                 }
                 if (currentTab == 2) {
-                  return RolLocalPage();
+                  return PuntosPage();
                 }
                 if (currentTab == 3) {
-                  return const MapaPage();
+                  return const MapaBusquedaPage();
                 }
                 return const Text('Menu');
               },

@@ -55,6 +55,46 @@ class RolesPage extends StatelessWidget {
                         }
                         buscando = false;
                         Navigator.of(context).pop();
+                        Utilidades.mostrarAlerta('Guardando...', context);
+                        for (var rl in roles) {
+                          late List<PerimetroLocal> perimetros = [];
+                          for (var p in rl.perimetro!) {
+                            PerimetroLocal pr = PerimetroLocal()
+                              ..latitud = p.latitud
+                              ..longitud = p.longitud
+                              ..predio = p.predio;
+                            perimetros.add(pr);
+                          }
+                          late RolLocal rol = RolLocal()
+                            ..id = rl.rolId
+                            ..anoreaSii = rl.anoreaSii
+                            ..areaHa = rl.areaHa
+                            ..codicomu = rl.codicomu
+                            ..descClasif = rl.descClasif
+                            ..descComu = rl.descComu
+                            ..escaIngr = rl.escaIngr
+                            ..fechIngr = rl.fechIngr
+                            ..idGeo = rl.idGeo
+                            ..rolId = rl.rolId
+                            ..lugarBn = rl.lugarBn
+                            ..msLink = rl.msLink
+                            ..nombrePredio = rl.nombrePredio
+                            ..ortoFoto = rl.ortoFoto
+                            ..perimetros.addAll(perimetros)
+                            ..ortoImage = rl.ortoImage
+                            ..prediosId = rl.prediosId
+                            ..propietario = rl.propietario
+                            ..rol = rl.rol;
+
+                          if (kDebugMode) {
+                            print(rol);
+                          }
+                          await rolServiceLocal.saveRol(rol);
+                        }
+                        Navigator.of(context).pop();
+
+                        Utilidades.showToast(
+                            context, 'Actualización Exitosa', '');
                       } catch (e) {
                         if (kDebugMode) {
                           print(e);
@@ -76,48 +116,6 @@ class RolesPage extends StatelessWidget {
                   }
                   return Container();
                 }),
-                TextButton.icon(
-                    onPressed: () async {
-                      Utilidades.mostrarAlerta('Guardando...', context);
-                      for (var rl in roles) {
-                        late List<PerimetroLocal> perimetros = [];
-                        for (var p in rl.perimetro!) {
-                          PerimetroLocal pr = PerimetroLocal()
-                            ..latitud = p.latitud
-                            ..longitud = p.longitud
-                            ..predio = p.predio;
-                          perimetros.add(pr);
-                        }
-                        late RolLocal rol = RolLocal()
-                          ..id = rl.rolId
-                          ..anoreaSii = rl.anoreaSii
-                          ..areaHa = rl.areaHa
-                          ..codicomu = rl.codicomu
-                          ..descClasif = rl.descClasif
-                          ..descComu = rl.descComu
-                          ..escaIngr = rl.escaIngr
-                          ..fechIngr = rl.fechIngr
-                          ..idGeo = rl.idGeo
-                          ..rolId = rl.rolId
-                          ..lugarBn = rl.lugarBn
-                          ..msLink = rl.msLink
-                          ..nombrePredio = rl.nombrePredio
-                          ..ortoFoto = rl.ortoFoto
-                          ..perimetros.addAll(perimetros)
-                          ..ortoImage = rl.ortoImage
-                          ..prediosId = rl.prediosId
-                          ..propietario = rl.propietario
-                          ..rol = rl.rol;
-
-                        if (kDebugMode) {
-                          print(rol);
-                        }
-                        await rolServiceLocal.saveRol(rol);
-                      }
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.save_as_outlined),
-                    label: const Text('Guardar'))
               ],
             ),
           ),
