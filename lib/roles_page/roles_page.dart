@@ -59,14 +59,12 @@ class RolesPage extends StatelessWidget {
                         for (var rl in roles) {
                           late List<PerimetroLocal> perimetros = [];
                           for (var p in rl.perimetro!) {
-                            PerimetroLocal pr = PerimetroLocal()
+                            final PerimetroLocal pr = PerimetroLocal()
                               ..latitud = p.latitud
-                              ..longitud = p.longitud
-                              ..predio = p.predio;
+                              ..longitud = p.longitud;
                             perimetros.add(pr);
                           }
-                          late RolLocal rol = RolLocal()
-                            ..id = rl.rolId
+                          final RolLocal rol = RolLocal()
                             ..anoreaSii = rl.anoreaSii
                             ..areaHa = rl.areaHa
                             ..codicomu = rl.codicomu
@@ -75,14 +73,12 @@ class RolesPage extends StatelessWidget {
                             ..escaIngr = rl.escaIngr
                             ..fechIngr = rl.fechIngr
                             ..idGeo = rl.idGeo
-                            ..rolId = rl.rolId
                             ..lugarBn = rl.lugarBn
                             ..msLink = rl.msLink
                             ..nombrePredio = rl.nombrePredio
                             ..ortoFoto = rl.ortoFoto
                             ..perimetros.addAll(perimetros)
                             ..ortoImage = rl.ortoImage
-                            ..prediosId = rl.prediosId
                             ..propietario = rl.propietario
                             ..rol = rl.rol;
 

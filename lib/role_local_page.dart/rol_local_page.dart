@@ -1,16 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roles/bloc/locacion/locacion_bloc.dart';
 import 'package:roles/bloc/rol_local/rol_local_bloc.dart';
 import 'package:roles/local_model/perimetro_local.dart';
 import 'package:roles/local_model/role_local.dart';
-import 'package:roles/menu/menu.dart';
+
 import 'package:roles/role_local_page.dart/role_local_list.dart';
 
-import '../mapa_page/mapa_page.dart';
 import '../services/roles_service_local.dart';
 import '../utils/calculos.dart';
 

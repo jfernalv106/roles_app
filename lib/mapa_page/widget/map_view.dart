@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:roles/bloc/mapa/mapa_bloc.dart';
@@ -19,7 +17,7 @@ class MapView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SizedBox(
       width: size.width,
-      height: size.height * 0.672,
+      height: size.height * 0.87,
       child: GoogleMap(
         initialCameraPosition: initialCameraPosition,
         compassEnabled: true,

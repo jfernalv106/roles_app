@@ -4,9 +4,8 @@ part 'role_local.g.dart';
 
 @collection
 class RolLocal {
+  @Index(unique: true, name: 'id')
   Id? id;
-  @Index(unique: true, name: 'id_rol')
-  int? rolId;
   int? prediosId;
   String? idGeo;
   String? rol;

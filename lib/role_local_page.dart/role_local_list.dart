@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:roles/bloc/rol_local/rol_local_bloc.dart';
 import 'package:roles/local_model/role_local.dart';
@@ -13,7 +12,7 @@ class RolLocalList extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height * 0.21,
+      height: size.height * 0.3,
       child: ListView.builder(
         itemCount: roles.length,
         itemBuilder: (context, index) {

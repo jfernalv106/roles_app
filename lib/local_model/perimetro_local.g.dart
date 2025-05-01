@@ -22,11 +22,6 @@ const PerimetroLocalSchema = Schema(
       id: 1,
       name: r'longitud',
       type: IsarType.double,
-    ),
-    r'predio': PropertySchema(
-      id: 2,
-      name: r'predio',
-      type: IsarType.long,
     )
   },
   estimateSize: _perimetroLocalEstimateSize,
@@ -52,7 +47,6 @@ void _perimetroLocalSerialize(
 ) {
   writer.writeDouble(offsets[0], object.latitud);
   writer.writeDouble(offsets[1], object.longitud);
-  writer.writeLong(offsets[2], object.predio);
 }
 
 PerimetroLocal _perimetroLocalDeserialize(
@@ -64,7 +58,6 @@ PerimetroLocal _perimetroLocalDeserialize(
   final object = PerimetroLocal();
   object.latitud = reader.readDoubleOrNull(offsets[0]);
   object.longitud = reader.readDoubleOrNull(offsets[1]);
-  object.predio = reader.readLongOrNull(offsets[2]);
   return object;
 }
 
@@ -79,8 +72,6 @@ P _perimetroLocalDeserializeProp<P>(
       return (reader.readDoubleOrNull(offset)) as P;
     case 1:
       return (reader.readDoubleOrNull(offset)) as P;
-    case 2:
-      return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -252,80 +243,6 @@ extension PerimetroLocalQueryFilter
         upper: upper,
         includeUpper: includeUpper,
         epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<PerimetroLocal, PerimetroLocal, QAfterFilterCondition>
-      predioIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'predio',
-      ));
-    });
-  }
-
-  QueryBuilder<PerimetroLocal, PerimetroLocal, QAfterFilterCondition>
-      predioIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'predio',
-      ));
-    });
-  }
-
-  QueryBuilder<PerimetroLocal, PerimetroLocal, QAfterFilterCondition>
-      predioEqualTo(int? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'predio',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<PerimetroLocal, PerimetroLocal, QAfterFilterCondition>
-      predioGreaterThan(
-    int? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'predio',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<PerimetroLocal, PerimetroLocal, QAfterFilterCondition>
-      predioLessThan(
-    int? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'predio',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<PerimetroLocal, PerimetroLocal, QAfterFilterCondition>
-      predioBetween(
-    int? lower,
-    int? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'predio',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
       ));
     });
   }

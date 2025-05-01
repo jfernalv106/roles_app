@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:roles/model/roles.dart';
+import 'package:roles/utils/constantes.dart';
 
 class RolList extends StatelessWidget {
   const RolList({super.key, required this.roles});
@@ -10,7 +11,7 @@ class RolList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 600,
+      height: Medidas.heigth(60),
       child: ListView.builder(
         itemCount: roles.length,
         itemBuilder: (context, index) {

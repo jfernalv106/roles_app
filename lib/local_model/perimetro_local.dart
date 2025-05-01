@@ -7,7 +7,7 @@ part 'perimetro_local.g.dart';
 class PerimetroLocal {
   //Id id = Isar.autoIncrement;
   // IsarLink<RolLocal> rol = IsarLink<RolLocal>();
-  int? predio;
+
   double? latitud;
   double? longitud;
   @ignore

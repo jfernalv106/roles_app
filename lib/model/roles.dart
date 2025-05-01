@@ -2,14 +2,12 @@ import 'package:roles/model/perimetro.dart';
 
 class Rol {
   String? id;
-  int? rolId;
-  int? prediosId;
+
   String? idGeo;
   String? rol;
   String? propietario;
   int? areaHa;
   String? nombrePredio;
-  List<Perimetro>? perimetro;
   int? escaIngr;
   int? fechIngr;
   String? msLink;
@@ -21,10 +19,10 @@ class Rol {
   String? ortoFoto;
   String? ortoImage;
 
+  List<Perimetro>? perimetro;
+
   Rol({
     this.id,
-    this.rolId,
-    this.prediosId,
     this.idGeo,
     this.rol,
     this.propietario,
@@ -45,8 +43,6 @@ class Rol {
 
   factory Rol.fromJson(Map<String, dynamic> json) => Rol(
         id: json["_id"],
-        rolId: json["id"],
-        prediosId: json["prediosID"],
         idGeo: json["idGeo"],
         rol: json["rol"],
         propietario: json["propietario"],
@@ -70,8 +66,6 @@ class Rol {
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "id": rolId,
-        "prediosID": prediosId,
         "idGeo": idGeo,
         "rol": rol,
         "propietario": propietario,

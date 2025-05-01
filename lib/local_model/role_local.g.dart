@@ -102,11 +102,6 @@ const RolLocalSchema = CollectionSchema(
       id: 16,
       name: r'rol',
       type: IsarType.string,
-    ),
-    r'rolId': PropertySchema(
-      id: 17,
-      name: r'rolId',
-      type: IsarType.long,
     )
   },
   estimateSize: _rolLocalEstimateSize,
@@ -114,21 +109,7 @@ const RolLocalSchema = CollectionSchema(
   deserialize: _rolLocalDeserialize,
   deserializeProp: _rolLocalDeserializeProp,
   idName: r'id',
-  indexes: {
-    r'id_rol': IndexSchema(
-      id: 5763849217172837568,
-      name: r'id_rol',
-      unique: true,
-      replace: false,
-      properties: [
-        IndexPropertySchema(
-          name: r'rolId',
-          type: IndexType.value,
-          caseSensitive: false,
-        )
-      ],
-    )
-  },
+  indexes: {},
   links: {},
   embeddedSchemas: {r'PerimetroLocal': PerimetroLocalSchema},
   getId: _rolLocalGetId,
@@ -249,7 +230,6 @@ void _rolLocalSerialize(
   writer.writeLong(offsets[14], object.prediosId);
   writer.writeString(offsets[15], object.propietario);
   writer.writeString(offsets[16], object.rol);
-  writer.writeLong(offsets[17], object.rolId);
 }
 
 RolLocal _rolLocalDeserialize(
@@ -283,7 +263,6 @@ RolLocal _rolLocalDeserialize(
   object.prediosId = reader.readLongOrNull(offsets[14]);
   object.propietario = reader.readStringOrNull(offsets[15]);
   object.rol = reader.readStringOrNull(offsets[16]);
-  object.rolId = reader.readLongOrNull(offsets[17]);
   return object;
 }
 
@@ -334,8 +313,6 @@ P _rolLocalDeserializeProp<P>(
       return (reader.readStringOrNull(offset)) as P;
     case 16:
       return (reader.readStringOrNull(offset)) as P;
-    case 17:
-      return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -353,72 +330,10 @@ void _rolLocalAttach(IsarCollection<dynamic> col, Id id, RolLocal object) {
   object.id = id;
 }
 
-extension RolLocalByIndex on IsarCollection<RolLocal> {
-  Future<RolLocal?> getByRolId(int? rolId) {
-    return getByIndex(r'id_rol', [rolId]);
-  }
-
-  RolLocal? getByRolIdSync(int? rolId) {
-    return getByIndexSync(r'id_rol', [rolId]);
-  }
-
-  Future<bool> deleteByRolId(int? rolId) {
-    return deleteByIndex(r'id_rol', [rolId]);
-  }
-
-  bool deleteByRolIdSync(int? rolId) {
-    return deleteByIndexSync(r'id_rol', [rolId]);
-  }
-
-  Future<List<RolLocal?>> getAllByRolId(List<int?> rolIdValues) {
-    final values = rolIdValues.map((e) => [e]).toList();
-    return getAllByIndex(r'id_rol', values);
-  }
-
-  List<RolLocal?> getAllByRolIdSync(List<int?> rolIdValues) {
-    final values = rolIdValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'id_rol', values);
-  }
-
-  Future<int> deleteAllByRolId(List<int?> rolIdValues) {
-    final values = rolIdValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'id_rol', values);
-  }
-
-  int deleteAllByRolIdSync(List<int?> rolIdValues) {
-    final values = rolIdValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'id_rol', values);
-  }
-
-  Future<Id> putByRolId(RolLocal object) {
-    return putByIndex(r'id_rol', object);
-  }
-
-  Id putByRolIdSync(RolLocal object, {bool saveLinks = true}) {
-    return putByIndexSync(r'id_rol', object, saveLinks: saveLinks);
-  }
-
-  Future<List<Id>> putAllByRolId(List<RolLocal> objects) {
-    return putAllByIndex(r'id_rol', objects);
-  }
-
-  List<Id> putAllByRolIdSync(List<RolLocal> objects, {bool saveLinks = true}) {
-    return putAllByIndexSync(r'id_rol', objects, saveLinks: saveLinks);
-  }
-}
-
 extension RolLocalQueryWhereSort on QueryBuilder<RolLocal, RolLocal, QWhere> {
   QueryBuilder<RolLocal, RolLocal, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterWhere> anyRolId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        const IndexWhereClause.any(indexName: r'id_rol'),
-      );
     });
   }
 }
@@ -484,115 +399,6 @@ extension RolLocalQueryWhere on QueryBuilder<RolLocal, RolLocal, QWhereClause> {
         lower: lowerId,
         includeLower: includeLower,
         upper: upperId,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterWhereClause> rolIdIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'id_rol',
-        value: [null],
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterWhereClause> rolIdIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'id_rol',
-        lower: [null],
-        includeLower: false,
-        upper: [],
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterWhereClause> rolIdEqualTo(int? rolId) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'id_rol',
-        value: [rolId],
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterWhereClause> rolIdNotEqualTo(
-      int? rolId) {
-    return QueryBuilder.apply(this, (query) {
-      if (query.whereSort == Sort.asc) {
-        return query
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'id_rol',
-              lower: [],
-              upper: [rolId],
-              includeUpper: false,
-            ))
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'id_rol',
-              lower: [rolId],
-              includeLower: false,
-              upper: [],
-            ));
-      } else {
-        return query
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'id_rol',
-              lower: [rolId],
-              includeLower: false,
-              upper: [],
-            ))
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'id_rol',
-              lower: [],
-              upper: [rolId],
-              includeUpper: false,
-            ));
-      }
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterWhereClause> rolIdGreaterThan(
-    int? rolId, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'id_rol',
-        lower: [rolId],
-        includeLower: include,
-        upper: [],
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterWhereClause> rolIdLessThan(
-    int? rolId, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'id_rol',
-        lower: [],
-        upper: [rolId],
-        includeUpper: include,
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterWhereClause> rolIdBetween(
-    int? lowerRolId,
-    int? upperRolId, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'id_rol',
-        lower: [lowerRolId],
-        includeLower: includeLower,
-        upper: [upperRolId],
         includeUpper: includeUpper,
       ));
     });
@@ -2719,75 +2525,6 @@ extension RolLocalQueryFilter
       ));
     });
   }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterFilterCondition> rolIdIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'rolId',
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterFilterCondition> rolIdIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'rolId',
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterFilterCondition> rolIdEqualTo(
-      int? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'rolId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterFilterCondition> rolIdGreaterThan(
-    int? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'rolId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterFilterCondition> rolIdLessThan(
-    int? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'rolId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterFilterCondition> rolIdBetween(
-    int? lower,
-    int? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'rolId',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
 }
 
 extension RolLocalQueryObject
@@ -2993,18 +2730,6 @@ extension RolLocalQuerySortBy on QueryBuilder<RolLocal, RolLocal, QSortBy> {
   QueryBuilder<RolLocal, RolLocal, QAfterSortBy> sortByRolDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'rol', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterSortBy> sortByRolId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'rolId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterSortBy> sortByRolIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'rolId', Sort.desc);
     });
   }
 }
@@ -3214,18 +2939,6 @@ extension RolLocalQuerySortThenBy
       return query.addSortBy(r'rol', Sort.desc);
     });
   }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterSortBy> thenByRolId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'rolId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QAfterSortBy> thenByRolIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'rolId', Sort.desc);
-    });
-  }
 }
 
 extension RolLocalQueryWhereDistinct
@@ -3334,12 +3047,6 @@ extension RolLocalQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'rol', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RolLocal, RolLocal, QDistinct> distinctByRolId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'rolId');
     });
   }
 }
@@ -3452,12 +3159,6 @@ extension RolLocalQueryProperty
   QueryBuilder<RolLocal, String?, QQueryOperations> rolProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'rol');
-    });
-  }
-
-  QueryBuilder<RolLocal, int?, QQueryOperations> rolIdProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'rolId');
     });
   }
 }

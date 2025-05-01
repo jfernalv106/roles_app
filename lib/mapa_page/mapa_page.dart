@@ -15,7 +15,6 @@ import 'package:roles/services/roles_service_local.dart';
 import 'package:roles/utils/calculos.dart';
 
 import '../local_model/role_local.dart';
-import '../role_local_page.dart/rol_local_page.dart';
 
 class MapaPage extends StatefulWidget {
   const MapaPage({super.key});
@@ -107,7 +106,7 @@ class _MapaPageState extends State<MapaPage> {
                       ),
                     ],
                   ),
-                  RolLocalList(roles: rolState.roles ?? []),
+                  // RolLocalList(roles: rolState.roles ?? []),
                 ],
               );
             },
@@ -140,11 +139,12 @@ class _MapaPageState extends State<MapaPage> {
   }
 
   void mostrarAlerta(RolLocal rol) {
+    final rolBloc = BlocProvider.of<RolLocalBloc>(context, listen: false);
     showDialog(
       context: context,
       builder: (context) {
         return Container(
-          height: 300,
+          height: 120,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
               boxShadow: const <BoxShadow>[
@@ -155,11 +155,11 @@ class _MapaPageState extends State<MapaPage> {
                     spreadRadius: 3.0)
               ]),
           child: SizedBox(
-            height: 300,
+            height: 80,
             child: AlertDialog(
-              title: Text('Rol: ${rol.rol}'),
+              title: Text(' ${rol.rol}'),
               content: SizedBox(
-                height: 100,
+                height: 60,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,6 +171,13 @@ class _MapaPageState extends State<MapaPage> {
                 ),
               ),
               actions: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      rolBloc.add(RemoveRolLocal(rol));
+                      Navigator.pushNamed(context, 'mapa');
+                    },
+                    child: const Text('Eliminar')),
                 TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
